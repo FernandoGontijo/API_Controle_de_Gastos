@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/desafio-exacta-db
+    username: fernando-gontijo
+    password: senha123

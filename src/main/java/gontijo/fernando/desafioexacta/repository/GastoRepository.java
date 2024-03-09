@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface GastoRepository extends JpaRepository<Gasto, Long> {
 
-    List<Gasto> findByNome(String nome);
-
     List<Gasto> findAll();
 
     Gasto findByIdGasto(Long idGasto);
