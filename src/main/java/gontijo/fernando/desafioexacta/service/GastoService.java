@@ -6,7 +6,12 @@ import gontijo.fernando.desafioexacta.model.Gasto;
 import gontijo.fernando.desafioexacta.repository.GastoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +22,8 @@ public class GastoService {
     @Autowired
     private GastoRepository gastoRepository;
 
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
+
 
 
     public GastoDTO criarGasto(GastoDTO gastoDTO) {
@@ -57,11 +63,7 @@ public class GastoService {
     public GastoDTO listarGastoPorId(Long id){
 
         Gasto gasto = gastoRepository.findByIdGasto(id);
-        if (gasto != null) {
-            return modelMapper.map(gasto, GastoDTO.class);
-        } else {
-            return new GastoDTO();
-        }
+        return modelMapper.map(gasto, GastoDTO.class);
     }
 
 }

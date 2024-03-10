@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>gontijo.fernando</groupId>
-	<artifactId>desafio-exacta.</artifactId>
+	<artifactId>desafio-exacta</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>desafio-exacta.</name>
 	<description>Desafio técnico para vaga de Backend Java na empresa Exacta Works.</description>
@@ -61,6 +61,20 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.38.1</version>
+				<executions>
+					<execution>
+						<id>build</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

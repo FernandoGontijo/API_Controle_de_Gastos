@@ -12,9 +12,7 @@ services:
       - "5432:5432"
 
   minha_aplicacao:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: desafio-exacta
     ports:
       - "8080:8080"

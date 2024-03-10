@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -18,25 +21,24 @@ public class GastoController {
 
 
     @PostMapping
-    public ResponseEntity<GastoDTO> criarGasto(@RequestBody GastoDTO gasto) {
-        GastoDTO gastoCriado = gastoService.criarGasto(gasto);
-        return new ResponseEntity<>(gastoCriado, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<GastoDTO> criarGasto(@RequestBody GastoDTO gasto) {
+        return Mono.just(gastoService.criarGasto(gasto));
     }
 
     @GetMapping
-    public ResponseEntity<List<GastoDTO>> listarGastos() {
-        List<GastoDTO> gastos = gastoService.listarGastos();
-        return new ResponseEntity<>(gastos, HttpStatus.OK);
+    public Flux<List<GastoDTO>> listarGastos() {
+        return Flux.just(gastoService.listarGastos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GastoDTO> listarGastoPorId(@PathVariable Long id) {
+    public Mono<GastoDTO> listarGastoPorId(@PathVariable Long id) {
+
         GastoDTO gasto = gastoService.listarGastoPorId(id);
-        if (gasto != null) {
-            return new ResponseEntity<>(gasto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (gasto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gasto não encontrado");
         }
+        return Mono.just(gasto);
     }
 
 

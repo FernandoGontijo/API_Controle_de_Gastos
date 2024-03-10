@@ -1,7 +1,17 @@
-FROM openjdk:17-alpine
+FROM bellsoft/liberica-openjdk-alpine-musl:17
 
-WORKDIR /usr/src/exacta
+COPY . /usr/src/desafio-exacta
 
-COPY target/exacta.jar ./exacta.jar
+WORKDIR /usr/src/desafio-exacta
 
-CMD ["java", "-jar", "exacta.jar"]
+RUN apk update && \
+    apk add maven && \
+    mvn package
+
+ADD target/desafio-exacta-0.0.1-SNAPSHOT.jar /usr/app
+
+WORKDIR /usr/app
+
+EXPOSE 8080
+
+ENTRYPOINT ["sh", "-c", "java -jar desafio-exacta-0.0.1-SNAPSHOT.jar"]
