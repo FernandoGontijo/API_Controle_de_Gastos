@@ -1,15 +1,12 @@
 package gontijo.fernando.desafioexacta.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,16 +19,22 @@ public class Gasto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idGasto;
+    @Column(name="id")
+    private Long id;
 
+    @Column(name="nome")
     private String nome;
 
+    @Column(name="descricao")
     private String descricao;
 
+    @Column(name="date")
     private LocalDateTime date;
 
+    @Column(name="valor")
     private Double valor;
 
-    private String Tags;
+    @Column(name="tags")
+    private String tags;
 
 }

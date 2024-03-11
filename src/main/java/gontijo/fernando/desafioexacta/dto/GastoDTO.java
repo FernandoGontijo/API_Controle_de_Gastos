@@ -16,7 +16,7 @@ public class GastoDTO implements Serializable {
 
     private static final long serialVersionUUID = 1L;
 
-    private Long idGasto;
+    private Long id;
 
     private String nome;
 

@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GastoService {
@@ -62,8 +63,15 @@ public class GastoService {
 
     public GastoDTO listarGastoPorId(Long id){
 
-        Gasto gasto = gastoRepository.findByIdGasto(id);
-        return modelMapper.map(gasto, GastoDTO.class);
+        Optional<Gasto> gasto = gastoRepository.findById(id);
+
+        if (gasto.isPresent()) {
+            return modelMapper.map(gasto.get(), GastoDTO.class);
+        } else {
+            return null;
+        }
+
+
     }
 
 }

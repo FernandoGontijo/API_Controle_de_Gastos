@@ -3,6 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
+    platform: linux/x86_64
     container_name: postgres-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -10,6 +11,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    networks:
+      - desafio-exacta_default
 
   minha_aplicacao:
     build: .
@@ -18,3 +21,13 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    networks:
+      - desafio-exacta_default
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+networks:
+    desafio-exacta_default:
+      driver: bridge
