@@ -1,9 +1,9 @@
-**Desafio Backend Java Exactaworks**
+**Desafio Backend Java**
 
 
 Descrição:
 
-Este projeto, desenvolvido em Java 17 com Spring Boot, foi criado para o processo de seleção da Exactaworks. A aplicação oferece uma API RESTful para gerenciar gastos.
+Este projeto, desenvolvido em Java 17 com Spring Boot, foi criado para um processo de seleção. A aplicação oferece uma API RESTful para gerenciar gastos.
 
 
 Funcionalidades:
